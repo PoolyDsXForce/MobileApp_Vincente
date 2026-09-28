@@ -48,6 +48,13 @@ void main() {
         path: '/login', 
         builder: (context, state) => LoginScreen(authService: authService), 
       ), 
+      GoRoute(
+        path: '/details/:id',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return DetailsScreen(id: id);
+        },
+      ),
     ], 
   ); 
  
@@ -77,12 +84,24 @@ class HomeScreen extends StatelessWidget {
     return Scaffold( 
       appBar: AppBar(title: const Text('Home')), 
       body: Center( 
-        child: ElevatedButton( 
-          onPressed: () { 
-            authService.logout(); 
-          }, 
-          child: const Text('Logout'), 
-        ), 
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                context.go('/details/42');
+              },
+              child: const Text('Go to Details (ID: 42)'),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                authService.logout();
+              },
+              child: const Text('Logout'),
+            ),
+          ],
+        ),
       ), 
     ); 
   } 
@@ -107,4 +126,23 @@ class LoginScreen extends StatelessWidget {
       ), 
     ); 
   } 
+}
+
+class DetailsScreen extends StatelessWidget {
+  final String id;
+
+  const DetailsScreen({Key? key, required this.id}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('Details $id')),
+      body: Center(
+        child: Text(
+          'Details $id',
+          style: const TextStyle(fontSize: 28),
+        ),
+      ),
+    );
+  }
 }

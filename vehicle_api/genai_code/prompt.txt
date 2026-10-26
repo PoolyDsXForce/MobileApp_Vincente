@@ -1,0 +1,13 @@
+Generate a complete FastAPI application using Python that manages vehicle manufacturers and vehicles.
+
+Requirements:
+- Use FastAPI.
+- Use Pydantic models.
+- Use an in-memory database.
+- Implement CRUD operations for manufacturers and vehicles.
+- Manufacturer fields: id, name, country.
+- Vehicle fields: id, manufacturer_id, make, model, year.
+- Validate that manufacturer_id exists.
+- Return appropriate HTTP status codes.
+- Include sample data.
+- Organize for use with a uv project.
